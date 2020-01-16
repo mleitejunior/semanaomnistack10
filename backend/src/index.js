@@ -2,10 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
+const { MONGO_USER, MONGO_PASSWORD, MONGO_DB } = require('../.env');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://mleitejunior:spaiders123@cluster0-8gfyn.mongodb.net/week10?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-8gfyn.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
