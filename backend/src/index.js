@@ -2,9 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
+const http = require('http');
 const { MONGO_USER, MONGO_PASS, MONGO_DB } = require('../.env');
+const { setupWebSocket } = require('./websocket');
+
 
 const app = express();
+const server = http.Server(app);
+
+setupWebSocket(server); 
+
 mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster0-8gfyn.mongodb.net/${MONGO_DB}?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -14,7 +21,7 @@ app.use(cors({ origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(routes);
 
-app.listen(3333);
+server.listen(3333);
 
 
 //MÉTODOS HTTP
