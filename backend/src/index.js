@@ -2,11 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
-const { MONGO_USER, MONGO_PASSWORD, MONGO_DB } = require('../.env');
+const { MONGO_USER, MONGO_PASS, MONGO_DB } = require('../.env');
 
 const app = express();
-
-mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-8gfyn.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster0-8gfyn.mongodb.net/${MONGO_DB}?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
